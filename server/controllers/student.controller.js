@@ -122,6 +122,7 @@ controller.findStudentById = async (req, res) => {
         delete _doc.password
         res.status(200).json({ estudiante: _doc, continuar: true });
     } catch (error) {
+        console.log(error)
         res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
     }
 
