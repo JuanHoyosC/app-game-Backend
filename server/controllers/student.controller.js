@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const fs = require("fs");
 const controller = {};
 
 const Estudiante = require('../models/student.model');
@@ -31,7 +32,7 @@ controller.addStudent = async (req, res) => {
         res.status(200).json({ mensaje: 'Usuario guardado con exito', continuar: true });
     } catch (error) {
         console.log(error)
-        res.json({ mensaje: 'Hubo un error' });
+        res.json({ mensaje: 'Hubo un error', continuar: false });
     }
 }
 
@@ -44,7 +45,7 @@ controller.updateSubscription = async (req, res) => {
         const { _id, subscription } = req.body;
         await Estudiante.findByIdAndUpdate(_id, { subscription })
     } catch (error) {
-
+        res.json({ mensaje: 'Hubo un error', continuar: false });
     }
 }
 
@@ -63,7 +64,7 @@ controller.findStudent = async (req, res) => {
         const token = jwt.sign({ token: _doc }, 'top_secret');
         res.status(200).json({ token, continuar: true });
     } catch (error) {
-        res.json({ mensaje: 'Hubo un error' });
+        res.json({ mensaje: 'Hubo un error', continuar: false });
     }
 };
 
@@ -88,7 +89,7 @@ controller.upAttribute = async (req, res) => {
         res.status(200).json({ estudiante: _doc, continuar: true });
     } catch (error) {
         console.log(error)
-        res.status(200).json({ mesnaje: 'Hubo un error', continuar: false });
+        res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
     }
 }
 
@@ -111,7 +112,7 @@ controller.downAttribute = async (req, res) => {
         //eviar los datos
         res.status(200).json({ estudiante: _doc, continuar: true });
     } catch (error) {
-        res.status(200).json({ mesnaje: 'Hubo un error', continuar: false });
+        res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
     }
 }
 
@@ -125,7 +126,17 @@ controller.findStudentById = async (req, res) => {
         console.log(error)
         res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
     }
+}
 
+controller.getPicture = async (req, res) => {
+    try {
+        console.log(req.body.path, req.body)
+        const data = fs.readFileSync(req.body.path);
+        res.send(data);
+    } catch (error) {
+        console.log('error', error)
+        res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
+    }
 }
 
 

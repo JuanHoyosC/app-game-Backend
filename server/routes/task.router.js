@@ -36,6 +36,7 @@ router.get('/get-tasks/:id', rutasProtegidas, controller.getTasks);
 router.get('/delete-task/:id', rutasProtegidas, controller.deleteTask);
 router.get('/get-task/:id', rutasProtegidas, controller.getTask);
 router.post('/task-download', rutasProtegidas, controller.getPathDownload);
+router.post('/task-download-2', rutasProtegidas, controller.getPathDownload2);
 
 
 module.exports = router;

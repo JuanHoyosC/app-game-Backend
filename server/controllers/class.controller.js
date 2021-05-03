@@ -21,7 +21,7 @@ controller.addClass = async (req, res) => {
         res.status(200).json({ curso: cursoNew, continuar: true });
     } catch (error) {
         console.log(error)
-        res.json({ mensaje: 'Hubo un error' });
+        res.json({ mensaje: 'Hubo un error', continuar: false });
     }
 }
 
@@ -32,7 +32,7 @@ controller.findClass = async (req, res) => {
 
         res.status(200).json({ curso, continuar: true });
     } catch (error) {
-        res.json({ mensaje: 'Hubo un error' });
+        res.json({ mensaje: 'Hubo un error', continuar: false });
     }
 };
 
@@ -41,7 +41,16 @@ controller.findClassById = async (id) => {
         const curso = await Curso.findById(id);
         return curso;
     } catch (error) {
-        return { mensaje: 'Hubo un error' };
+        return { mensaje: 'Hubo un error', continuar: false };
+    }
+}
+
+controller.getClasses = async (req, res) => {
+    try {
+        const cursos = await Curso.find();
+        res.status(200).json({ cursos, continuar: true });
+    } catch (error) {
+        res.json({ mensaje: 'Hubo un error', continuar: false });
     }
 }
 

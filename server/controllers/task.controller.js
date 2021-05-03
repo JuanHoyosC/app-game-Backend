@@ -90,15 +90,23 @@ controller.getPathDownload = async (req, res) => {
 
         //Obtiene el path del archivo
         const path = tarea.path_tarea;
-        console.log(fs.readFileSync(path))
-        console.log('dsfsd')
+   
         const data = fs.readFileSync(path);
         res.send(data);
     } catch (error) {
-        console.log('error')
         res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
     }
 }
+
+controller.getPathDownload2 = async (req, res) => {
+    try {   
+        const data = fs.readFileSync(req.body.path);
+        res.send(data);
+    } catch (error) {
+        res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
+    }
+}
+
 
 controller.uploadTaskStudent = async (req, res) => {
     try {

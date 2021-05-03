@@ -32,9 +32,14 @@ const downAttribute = (dificultad, usuario) => {
 
     //Disminuye la vida
     usuario.vida -= life(dificultad, usuario.nivel);
-    if (usuario.vida <= 0) {
+    if(usuario.vida <= 0){
+        usuario.vida = 0;
+    }
+    
+    if (usuario.vida <= 0 && usuario.nivel > 1) {
         usuario.nivel -=1;
-        usuario.vida = lifeMax( usuario.nivel );
+        usuario.vida_actual = lifeMax(usuario.nivel);
+        usuario.vida = usuario.vida_actual;
     }
 
 }
