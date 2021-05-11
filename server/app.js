@@ -7,12 +7,12 @@ const path = require('path');
 
 
 //Settings
-app.set('port', 4000 || process.env.PORT);
+app.set('port', 3000 || process.env.PORT);
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'uploads/perfiles')));
 
 //Middlewares
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: '*' }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

@@ -1,6 +1,6 @@
 const moongoose = require('mongoose');
 
-moongoose.connect('mongodb://localhost/appGame', {
+moongoose.connect('mongodb+srv://appGame:j3106060631@cluster0.05tac.mongodb.net/appGame?retryWrites=true&w=majority', {
     useNewUrlParser:true,
     useUnifiedTopology: true,
     useFindAndModify: false 

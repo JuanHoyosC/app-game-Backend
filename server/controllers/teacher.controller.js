@@ -7,7 +7,7 @@ const Profesor = require('../models/teacher.model');
 controller.addTeacher = async (req, res) => {
     try {
         //Leer los datos enviados desde el frontend
-        let { password, nombre, apellidos, correo } = req.body;
+        let { password, nombre, apellidos, correo, foto } = req.body;
 
         //Verifica que el correo no se encuentre ya tomado
         const correoFind = await Profesor.find({ correo });
@@ -15,9 +15,11 @@ controller.addTeacher = async (req, res) => {
 
         //Encripta la contraseña para ser guardada en la base de datos
         password = await bcrypt.hash(password, 10);
+        
+        console.log(foto)
 
         //Crea el model estudiante
-        const profesor = new Profesor({ password, nombre, apellidos, correo });
+        const profesor = new Profesor({ password, nombre, apellidos, correo, foto });
 
         await profesor.save();
 

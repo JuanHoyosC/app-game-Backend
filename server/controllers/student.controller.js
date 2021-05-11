@@ -130,7 +130,7 @@ controller.findStudentById = async (req, res) => {
 
 controller.getPicture = async (req, res) => {
     try {
-        console.log(req.body.path, req.body)
+        console.log(req.body.path, req.body, 4535)
         const data = fs.readFileSync(req.body.path);
         res.send(data);
     } catch (error) {

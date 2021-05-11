@@ -37,6 +37,7 @@ controller.getTasks = async (req, res) => {
         const tareas = await Tarea.find({ id_curso: req.params.id });
         res.status(200).json({ tareas, continuar: true });
     } catch (error) {
+        console.log(error);
         res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
     }
 }

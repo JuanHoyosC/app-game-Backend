@@ -7,7 +7,8 @@ const teacherSchema = new Schema({
     apellidos: { type: String, required: true, trim: true },
     curso: { type: String, required: false, dafault: '' },
     curso_id: { type: String, required: false, default: '' },
-    subscription: {type: Object, required: false, default: '' }
+    subscription: {type: Object, required: false, default: '' },
+    foto: {type: String, required: true, trim: true},
 });
 
 
