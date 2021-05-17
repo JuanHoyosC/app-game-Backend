@@ -1,6 +1,14 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary');
 const controller = {};
+
+cloudinary.config({
+    cloud_name: 'taskventure',
+    api_key: '161252159937296',
+    api_secret: 'YDyKn5pcseaEUSu5gFnl_Z6Zteo'
+})
+
 const Profesor = require('../models/teacher.model');
 
 
@@ -16,7 +24,8 @@ controller.addTeacher = async (req, res) => {
         //Encripta la contraseña para ser guardada en la base de datos
         password = await bcrypt.hash(password, 10);
         
-        console.log(foto)
+        const { url } = await cloudinary.v2.uploader.upload(foto);
+        foto = url;
 
         //Crea el model estudiante
         const profesor = new Profesor({ password, nombre, apellidos, correo, foto });

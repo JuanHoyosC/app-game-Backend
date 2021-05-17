@@ -35,7 +35,7 @@ controller.addStudent = async (req, res) => {
 
         const { url } = await cloudinary.v2.uploader.upload(foto);
         foto = url;
-        console.log(url)
+
  
         const estudiante = new Estudiante({ username, password, nombre, apellidos, correo, foto });
 
