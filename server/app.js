@@ -7,7 +7,7 @@ const path = require('path');
 
 
 //Settings
-app.set('port', 3000 || process.env.PORT);
+app.set('port', process.env.PORT || 3002, process.env.HOST || '::');
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'uploads/perfiles')));
 
@@ -31,6 +31,6 @@ app.use(require('./routes/item.router'));
 require('./database');
 
 //Starting the server
-app.listen(app.get('port'), () => {
+app.listen(process.env.PORT || 3002, process.env.HOST || '::', () => {
   console.log(`app corriendo en el puerto ${app.get('port')}`);
 })

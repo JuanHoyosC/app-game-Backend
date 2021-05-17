@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 const teacherSchema = new Schema({
-    correo: { type: String, required: true },
+    correo: { type: String, required: true, lowercase: true },
     password: { type: String, required: true },
     nombre: { type: String, required: true, trim: true },
     apellidos: { type: String, required: true, trim: true },

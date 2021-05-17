@@ -25,7 +25,7 @@ router.post('/upload-picture', upload.any(), async (req, res) => {
         res.json({path_foto: req.files[0].path});
 
     } catch (error) {
-        console.log(error)
+        console.log(error, 'd')
         res.status(404).json({ mensaje: 'Hubo un error', continuar: false });
     }
 })

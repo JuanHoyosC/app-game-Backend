@@ -1,7 +1,14 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fs = require("fs");
+const cloudinary = require('cloudinary');
 const controller = {};
+
+cloudinary.config({
+    cloud_name: 'taskventure',
+    api_key: '161252159937296',
+    api_secret: 'YDyKn5pcseaEUSu5gFnl_Z6Zteo'
+})
 
 const Estudiante = require('../models/student.model');
 const clases = require('./class.controller');
@@ -25,6 +32,11 @@ controller.addStudent = async (req, res) => {
         password = await bcrypt.hash(password, 10);
 
         //Crea el model estudiante
+
+        const { url } = await cloudinary.v2.uploader.upload(foto);
+        foto = url;
+        console.log(url)
+ 
         const estudiante = new Estudiante({ username, password, nombre, apellidos, correo, foto });
 
         await estudiante.save();
@@ -130,7 +142,6 @@ controller.findStudentById = async (req, res) => {
 
 controller.getPicture = async (req, res) => {
     try {
-        console.log(req.body.path, req.body, 4535)
         const data = fs.readFileSync(req.body.path);
         res.send(data);
     } catch (error) {
