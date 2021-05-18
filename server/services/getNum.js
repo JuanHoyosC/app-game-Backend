@@ -1,7 +1,7 @@
 const getFrecuency = ( frecuencia ) => {
     if(frecuencia === 'Diario') return 1;
     if(frecuencia === 'Dos dias') return 2;
-    if(frecuencia === 'Semanal') return 15;
+    if(frecuencia === 'Semanal') return 7;
     if(frecuencia === 'Mensual') return 30;
     return 1;
 }

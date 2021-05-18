@@ -17,6 +17,22 @@ controller.addHabit = async (req, res) => {
     }
 }
 
+controller.editHabit = async (req, res) => {
+    try {
+        const { frecuencia, _id } = req.body;
+        const proxima_fecha = moment().add('days', getFrecuency(frecuencia));
+        delete req.body.frecuencia;
+        
+        await Habit.findByIdAndUpdate(_id, { ...req.body, proxima_fecha, frecuencia, proxima_notificacion: proxima_fecha });
+        const newHabito = await Habit.findById(_id);
+
+        res.status(200).json({ mensaje: 'Habito actualizado', continuar: true, habito: newHabito });
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({ mensaje: 'Hubo un error', continuar: false });
+    }
+}
+
 controller.getHabitsAll = async () => {
     try {
         return await Habit.find();
